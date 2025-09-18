@@ -56,9 +56,9 @@ if cargar == "s":
         metadatas=[{"fuente": "marfan.txt"} for _ in chunks]
     )
 
-    print(f"✅ Se guardaron {len(chunks)} chunks en Chroma")
+    print(f"Se guardaron {len(chunks)} chunks en Chroma")
 else:
-    print("⚠️ No se cargó marfan.txt")
+    print("No se cargó marfan.txt")
 
 
 # Función de búsqueda en Chroma
@@ -76,18 +76,18 @@ print("\nEscribe tu pregunta (o 'salir' para terminar):")
 while True:
     query = input("Pregunta: ").strip()
     if query.lower() == "salir":
-        print("👋 Saliendo del programa...")
+        print("Saliendo del programa...")
         break
 
     relevant_chunks = buscar_chunks(query, top_k=2)
 
-    prompt = "Usando SOLO la información a continuación, responde la pregunta.\n\n"
+    prompt = "Usando solo la información a continuación, responde la pregunta.\n\n"
     for chunk in relevant_chunks:
         prompt += chunk + "\n"
     prompt += f"\nPregunta: {query}\nRespuesta:"
 
     respuesta = llm(prompt, max_tokens=200)
-    print("\n📌 Respuesta del modelo:")
+    print("\nRespuesta del modelo:")
     print(respuesta["choices"][0]["text"])
     print("-" * 60)
 
